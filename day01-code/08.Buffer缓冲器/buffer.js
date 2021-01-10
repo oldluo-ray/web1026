@@ -7,18 +7,3 @@
  *     5.Buffer是Node中非常核心的模块，无需下载，无需引入，直接可以使用
  * */
 
-// console.log(Buffer)
-// 弃用了
-// const buf = new Buffer(10)
-// console.log(buf)
-
-// Buffer.alloc() 性能较高,也比较安全
-// const buf = Buffer.alloc(10)
-// console.log(buf)
-// Buffer.allocUnsafe() 性能最高,但是不安全
-// const buf = Buffer.allocUnsafe(10)
-// console.log(buf)
-
-// 直接把一个数据转成buffer
-const buf = Buffer.from('hello nodexxx')
-console.log(buf)

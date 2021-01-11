@@ -15,6 +15,11 @@
 
   3.npm与node是什么关系？
      安装node之后，自动默认安装了一个npm包管理器
+     node package manager
+
+     package-lock.json 的作用: npm install 执行优先查找package-lock.json中dependencies
+     字段中依赖的其他包.在package-lock.json中,指定了依赖项以及依赖项具体的版本号和下载地址
+     比package.json更快速,更安全
 
   4.npm常用的命令：
      
@@ -27,12 +32,13 @@
             （下载并安装xxx包到当前工程的node_modules文件夹中，并且将该包写入包说明文件（pacjage.json），并添加到开发依赖（devDependencies中）
 
             3.npm install 或 npm i
-            （安装所有在package.json中声明的包）
+            （安装所有在package.json/package-lock.json中声明的包）
 
             4.npm install xxxxx@1.2.3 :安装xxxx包的指定版本
 
             5.npm install xxxx -g:全局安装xxxx包（一般来说有指令的包，要进行全局安装，全局安装之后的包，在任意位置都能使用）
-
+            全局包路径:C:\Users\自己的用户名\AppData\Roaming\npm\node_modules
+            查看所有的全局包: npm list -g --depth=0
       二、移除：
 
             1.npm remove xxx

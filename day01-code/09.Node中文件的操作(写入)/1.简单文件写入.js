@@ -18,7 +18,7 @@
  *                     0o444 ：文件被读取的权限
  *                 --encoding ：编码，默认是：'utf-8'
  *
- *           --callback：回调函数
+ *           --callback：回调函数 err
  *
  *   在Node中有一个原则：错误优先
  *

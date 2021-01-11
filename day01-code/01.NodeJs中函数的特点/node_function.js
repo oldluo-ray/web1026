@@ -18,3 +18,17 @@
 //#endregion
 
 
+
+// 在node平台下执行这个js的时候,node会自动给这个js文件里面的代码,包裹一个函数
+
+
+// function fn(){
+//     console.log('自定义的函数')
+//     // 在函数执行的过程中,想要查看当前函数
+//     console.log(arguments.callee.toString())
+// }
+// fn()
+console.log('node平台下执行')
+// console.log(arguments.callee.toString())
+console.log(__filename) // 返回当前文件的绝对路径
+console.log(__dirname) //返回当前文件所处文件夹的绝对路径

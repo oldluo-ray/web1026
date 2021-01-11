@@ -8,7 +8,7 @@
  *                     'r' ：读取
  *                     'a' ：追加
  *               --encoding ：编码，默认是：'utf-8'
- *           --callback：回调函数
+ *           --callback：回调函数  err, data
  *
  */
 

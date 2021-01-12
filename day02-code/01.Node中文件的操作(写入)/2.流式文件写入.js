@@ -26,3 +26,27 @@
  * 
  * */
 
+ 
+//  1. 引入fs模块
+const fs = require('fs')
+// 2. 创建可写流
+const ws = fs.createWriteStream('./test.txt', {
+    start: 10
+})
+
+// 3. 写入数据
+ws.write('海静头像硅谷logo')
+ws.write('沛华渣男锡纸烫')
+ws.write('哈哈哈哈')
+
+// 写入完毕要关闭流
+ws.end()
+
+// 监听流的开启和关闭
+ws.on('open',()=>{
+    console.log('流开启了')
+})
+ws.on('close',()=>{
+    console.log('流关闭了')
+})
+

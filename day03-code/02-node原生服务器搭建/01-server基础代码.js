@@ -26,4 +26,21 @@ server.listen(5000, err => {
 })
 */
 
+// 使用node原生快速搭建服务
+// 1. 导入http模块
+const http = require('http')
+
+// 2. 创建一个服务对象
+const server = http.createServer((request, response)=>{
+   // 户户端发送给服务器的所有请求,被接收到之后,都会调用这个函数
+   // request 表示请求对象
+   // response表示相应对象
+   response.end('ok')
+})
+
+// 3. 监听服务器开启
+server.listen(5000,(err)=>{
+   if(err)console.log('服务器启动错误', err)
+   else console.log('服务器启动成功')
+})
 

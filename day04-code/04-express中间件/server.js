@@ -42,19 +42,47 @@ const app = express()
 
 // 应用级的中间件
 // 自己写的中间件就是应用级的中间件
-app.use((req, res, next) => {
-  req.abc = '马上下课'
-  console.log('应用级中间件执行了')
-  next()
-})
+// app.use((req, res, next) => {
+//   req.abc = '马上下课'
+//   console.log('应用级中间件执行了')
+//   next()
+// })
+// 第三方的中间件
+// 1. 下载  npm i body-parser
+// 2. 引入
+// const bodyParser = require('body-parser')
+// 3. 使用中间件
+// 写法1: 不管是get还是post,都是执行这个中间件.如果有很多get请求,这里就会被无意义的调用多次
+// app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/index', (req, res) => {
-  console.log(req.abc)
-  res.send('/index-get')
-})
+// 写法2:
+// const xxxBodyParser = bodyParser.urlencoded({ extended: true })
 
-app.get('/detail', (req, res) => {
-  res.send('/detail-get')
+// function fnMiddleWare(req, res, next) {
+//   console.log('应用级中间件执行了')
+//   req.abc = '嘿嘿嘿'
+//   next()
+// }
+// app.get('/index', fnMiddleWare, (req, res) => {
+//   console.log(req.abc)
+//   res.send('/index-get')
+// })
+
+// app.get('/detail', (req, res) => {
+//   res.send('/detail-get')
+// })
+
+// 只有请求的方式是post,并且路径是/data, 才会先执行,将post请求上传的数据,解析添加到req.body的中间件函数.然后中间件函数执行完,再执行路由的回调函数
+// app.post('/data', xxxBodyParser, (req, res) => {
+//   console.log(req.body)
+//   res.send('post响应成功')
+// })
+
+// 使用express内置的中间件
+// app.use(express.urlencoded({ extended: true }))
+app.post('/data', express.urlencoded({ extended: true }), (req, res) => {
+  console.log(req.body)
+  res.send('post响应成功')
 })
 
 app.listen(5000)

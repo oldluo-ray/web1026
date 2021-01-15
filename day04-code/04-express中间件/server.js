@@ -35,3 +35,26 @@
       3.当一个请求到达express服务器时，不管经过多少次的加工，所有路由和中间件中的request以及response，都是对第一次的引用。
 *
 * */
+
+const express = require('express')
+
+const app = express()
+
+// 应用级的中间件
+// 自己写的中间件就是应用级的中间件
+app.use((req, res, next) => {
+  req.abc = '马上下课'
+  console.log('应用级中间件执行了')
+  next()
+})
+
+app.get('/index', (req, res) => {
+  console.log(req.abc)
+  res.send('/index-get')
+})
+
+app.get('/detail', (req, res) => {
+  res.send('/detail-get')
+})
+
+app.listen(5000)

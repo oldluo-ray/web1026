@@ -32,6 +32,8 @@ const express = require('express')
 // 2. 创建一个应用对象(类似于node原生的server,但是比server功能强大)
 const app = express()
 
+app.disable('x-powered-by')
+
 // 定义处理请求的方法
 // app.get/post/all
 // app.get('/index', (request, response) => {

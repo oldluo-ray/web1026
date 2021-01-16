@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>欢迎您: xxx</h3>
+
+    <script>
+      //   console.log(location.search.split('=')[1])
+      let name = location.search.split('=')[1]
+      // 注意: 拿到的name是经过url编码的.需要解码一下
+      name = decodeURI(name)
+      const h3 = document.querySelector('h3')
+
+      h3.innerText = '欢迎您: ' + name
+    </script>
+  </body>
+</html>

@@ -7,9 +7,65 @@
   </head>
   <body>
     <form action="http://localhost:5000/login" method="POST">
-      用户名: <input type="text" name="username" /> <br />
-      密码: <input type="password" name="password" /> <br />
+      用户名: <input type="text" name="username" /><span
+        style="color: red"
+      ></span>
+      <br />
+      密码: <input type="password" name="password" /><span
+        style="color: red"
+      ></span>
+      <br />
       <input type="submit" value="登录" />
     </form>
+    <script>
+      // 1. 获取元素
+      const username = document.querySelector('input[name=username]')
+      const psw = document.querySelector('input[name=password]')
+      const submit = document.querySelector('input[type=submit]')
+
+      // 定义三个标记,用于记录对应的表单项是否通过校验
+      let userFlag = false // true表示校验通过了, false表示校验没有通过
+      let pswFlag = false
+
+      // 给表单项注册失去焦点事件 blur
+      username.onblur = function () {
+        // 获取用户输入的数据
+        const value = this.value
+        // 正则校验用户输入是否符合要求(字符6~18位,只能是英文,可以是大写,也可以小写)
+        const res = /^[A-Za-z]{6,18}$/.test(value)
+        // 如果失败,应该提示用户
+        if (!res) {
+          // 给span添加文本
+          this.nextElementSibling.innerText = '应该是6~18位的英文字符'
+          userFlag = false
+        } else {
+          this.nextElementSibling.innerText = ''
+          userFlag = true
+        }
+      }
+      psw.onblur = function () {
+        // 获取用户输入的数据
+        const value = this.value
+        // 正则校验用户输入是否符合要求(可以是数字,英文字符(6~18))
+        const res = /^[\w]{6,18}$/.test(value)
+        // 如果失败,应该提示用户
+        if (!res) {
+          // 给span添加文本
+          this.nextElementSibling.innerText = '应该是6~18位的数字,字母,下划线'
+          pswFlag = false
+        } else {
+          this.nextElementSibling.innerText = ''
+          pswFlag = true
+        }
+      }
+
+      // 当三个表单项都符合要求,点击提交按钮,才可以发送请求给服务器.否则不能发送
+      submit.onclick = function (e) {
+        // 判断
+        if (!(userFlag && pswFlag)) {
+          e.preventDefault()
+        }
+      }
+    </script>
   </body>
 </html>

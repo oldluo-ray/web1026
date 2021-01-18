@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>欢迎您: <%= username %></h3>
+
+    <!-- 介绍ejs的基本使用 -->
+    <!-- 当ejs解析这个模板的时候,<%%>外面的内容,原样输出 -->
+    <!-- 当ejs解析这个模板的时候,<%%>里面的代码,当做js去执行 -->
+    <div>
+      <!-- <% var a = '
+      <script src="http://localhost:5000/test.js"></script>
+      ' %> -->
+    </div>
+     <!-- 当<%-%> / <%=%> 那么里面的代码才会渲染到页面上
+      
+      - 会解析html标签, 一般在详情页的时候,因为数据是写好的html格式字符串,所以这里会使用-
+      == 不会解析html标签 实际开发,为了安全,更多的使用=
+    
+    -->
+    <!-- <div><%- a %></div>
+    <div><%= a %></div> -->
+
+   
+  </body>
+</html>

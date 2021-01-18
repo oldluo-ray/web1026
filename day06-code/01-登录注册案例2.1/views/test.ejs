@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 条件渲染 -->
+    <% var age = 6 %> 
+    <% if(age >= 18){ %>
+    <h5>看大人看的动画片</h5>
+    <% }else{ %>
+    <h5>看天线宝宝</h5>
+    <% } %>
+
+    <!-- 列表渲染 -->
+    <% var arr = ['吃饭', '睡觉', '敲代码', '打豆豆']%>
+
+    <ul>
+      <% for(var i = 0; i < arr.length; i++){ %>
+      <li><%= arr[i] %></li>
+      <% } %>
+    </ul>
+  </body>
+</html>

@@ -26,7 +26,7 @@ router.get('/userCenter', (req, res) => {
   if (username) {
     // 表示之前登陆过
     // res.render(模板名称,数据)
-    res.render('userCenter', { username })
+    res.render('userCenter', { username: username })
   } else {
     // 表示之前没有登录
     res.redirect('http://localhost:5000/login')

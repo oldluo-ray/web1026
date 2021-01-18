@@ -11,4 +11,9 @@
     <!-- 当ejs解析这个模板的时候,<%%>里面的代码,当做js去执行 -->
     <h3>欢迎您: <%= username %></h3>
   </body>
+  <script>
+    console.log(document.cookie)
+    // document.cookie = 'a=1'
+    document.cookie = 'a=9'
+  </script>
 </html>

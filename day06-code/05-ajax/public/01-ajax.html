@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 目前知道的,在浏览器中给服务器发送请求的方式有哪些: 
+    
+         1. 通过form表单发请求 get/post/...
+         2. 浏览器地址栏发送请求  get
+         3. link的href属性  一般用于请求css文件  get
+         4. a的href属性,修改了浏览器的地址栏,通过地址栏发出去 get
+         5. img的src, 只不过是用来请求图片的  get
+         6. script的src. 只不过是用来请求js文件 get
+
+
+         form表单发送请求的缺点:
+         1. 一定会跳转页面
+         2. form表单给服务器发请求是同步的(阻塞代码执行,页面加载时间过长)
+
+
+         js原生提供了ajax发送请求的方式:
+         1. 可以用任何请求方式发送请求
+         2. 不会跳转页面(可以局部刷新)
+         3. 异步执行的(不会阻塞代码)
+
+    
+    
+    
+    
+      -->
+
+    <!-- <form action="" enctype="application/x-www-form-urlencoded"></form> -->
+  </body>
+
+  <script>
+    // 使用户xmlhttprequest发送请求的步骤
+    // 1. 创建xmlhttprequest对象
+    // const xhr = new XMLHttpRequest()
+    // // 2. 设置请求行
+    // xhr.open('请求方式','请求的url地址?参数名=值&参数名=值')
+    // // 3. 设置请求头
+    // xhr.setRequestHeader('请求头的属性', '请求头的值')
+    // // 4. 设置请求主体以及发送请求
+    // xhr.send(请求主体的数据)
+
+    // get请求:
+    // 1. 创建xmlhttprequest对象
+    // const xhr = new XMLHttpRequest()
+    // // 2. 设置请求行
+    // xhr.open('get', 'http://localhost:5000/test?name=zs')
+    // // 3. get请求不需要设置请求头
+    // // 4. 设置请求主体,并发送请求
+    // // get请求没有请求主体,所以send不需要传参数或传入null/undefined
+    // xhr.send(null)
+
+    // post
+    // 1. 创建xmlhttprequest对象
+    const xhr = new XMLHttpRequest()
+    // // 2. 设置请求行
+    // console.log(xhr.readyState)
+    xhr.open('post', 'http://localhost:5000/test')
+    console.log(xhr.readyState)
+    // // 3. 设置请求头
+    // 注意:post请求并且请求主体有数据,必须设置请求头,否则后台还是拿不到数据
+    xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
+    // // 4. 设置请求主体,并发送请求
+    // 注意: post上传的数据的格式要求是键=值&键=值
+    xhr.send('name=zs&age=18')
+
+    // 响应:
+    xhr.onreadystatechange = function () {
+      console.log(xhr.readyState)
+      // 这个事件只监听了readyState值为2,3,4的变化
+      // 但是我们不关心2,3. 只关心4. 4表示响应完成(注意,完成不代表成功)
+      if (xhr.readyState === 4) {
+        //如果代码可以执行到这里,只表示请求-响应完成了.可能是成功的,也可能是失败的
+        // 如果xhr.status拿到的状态码是200,就表示成功
+        console.log(xhr.status)
+        if (xhr.status === 200) {
+          //表示成功
+          // 获取响应主体:
+          console.log(xhr.responseText) //返回的是字符串
+
+          // 了解: 获取响应头:
+          console.log(xhr.getAllResponseHeaders()) //返回响应头中所有的数据
+          console.log(xhr.getResponseHeader('content-type')) //返回响应头中指定的数据
+        } else if (xhr.status === 400) {
+          //表示失败
+        }
+      }
+    }
+  </script>
+</html>

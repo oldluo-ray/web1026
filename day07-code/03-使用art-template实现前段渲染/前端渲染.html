@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!--需求: 给btn按钮注册点击事件,点击了按钮之后,浏览器要给服务器发送请求,获取列表数据. 拿到数据之后,根据数据,动态的渲染li标签 -->
+    <h3>前端动态渲染数据</h3>
+    <button id="btn">获取数据</button>
+    <ul id="ul">
+      <!-- <li>
+        <h4>名字</h4>
+        <div>性别</div>
+        <p>描述信息</p>
+      </li> -->
+    </ul>
+
+    <script>
+      function getList(data) {
+        // console.log(data)
+        // 遍历数组,数组中有几个对象,就应该有几个li标签
+        let str = '' //为了不把undefined拼接进去,定义str初始化为一个空的字符串
+        data.forEach((item) => {
+          str += `<li>
+                        <h4>${item.name}</h4>
+                        <div>${item.gender}</div>
+                        <p>${item.info}</p>
+                  </li>`
+        })
+        console.log(str)
+        // ul执行的时候,全局已经有了ul这个对象了
+        ul.innerHTML = str
+      }
+      const btn = document.getElementById('btn')
+      const ul = document.getElementById('ul')
+      btn.onclick = function () {
+        // jsonp形式发送请求
+        // 1. 定义一个全局的函数,用于接收数据
+        // 2. 动态的创建script标签
+        const script = document.createElement('script')
+        // 3. 添加src属性, 要在路径后面拼接一个callback=函数名
+        script.src = 'http://localhost:5000/getUsers?callback=getList'
+        // 4. 将script添加到页面,才能执行这个script标签
+        document.body.appendChild(script)
+      }
+    </script>
+  </body>
+</html>

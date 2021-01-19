@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 像disabled这类在标签上只需要些属性名的属性,在js中控制,都是通过布尔值控制
+    
+        true: 就相当于是写了这个属性
+        false: 就相当于没写这个属性
+    -->
+    <button id="btn">按钮</button>
+    <button id="btn1">按钮1</button>
+
+    <!-- 如果直接给按钮注册事件,点击按钮发送ajax请求. 只要点击按钮,就可以直接发送请求.会导致请求次数太多,对服务器压力太大 
+    
+    解决: 用户发出去一次请求之后,数据响应之前.都不能在发送这次请求了
+   
+    1. 第一次点击可以正常发送请求
+    2. 请求发送出去之后,立刻禁用按钮
+    3. 当响应完成之后,再讲禁用取消
+    
+    -->
+
+    <script>
+      const btn = document.getElementById('btn')
+      const btn1 = document.getElementById('btn1')
+      const xhr = new XMLHttpRequest()
+      btn.onclick = function () {
+        xhr.open('get', 'http://localhost:5000/test')
+        xhr.send()
+        btn.disabled = true
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            btn.disabled = false
+          }
+        }
+      }
+
+      btn1.onclick = function () {
+        xhr.abort()
+      }
+      // xhr.abort() // 取消掉当前这次请求
+      // 监听浏览器关闭的事件: window.onunload
+    </script>
+  </body>
+</html>

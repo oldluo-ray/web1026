@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    用户名:<input id="inp" type="text" />
+    <button id="btn">确认</button>
+    <span id="tip"></span>
+    <script>
+      const btn = document.getElementById('btn')
+      const inp = document.getElementById('inp')
+      const tip = document.getElementById('tip')
+
+      btn.onclick = function () {
+        // 1. 获取用户输入的用户名
+        const value = inp.value
+        // 2. 给服务器发送异步请求
+        // 2.1 创建xhr对象
+        const xhr = new XMLHttpRequest()
+        // 2.2 设置请求行
+        xhr.open('post', 'http://localhost:5000/checkname')
+        // 2.3 设置请求头
+        xhr.setRequestHeader(
+          'content-type',
+          'application/x-www-form-urlencoded'
+        )
+        // 2.4 设置请求主体
+        xhr.send('username=' + value)
+        // 3. 接收到服务器响应的结果,根据结果,动态的提示用户
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              // 根据响应的信息,动态的展示提示用户的信息
+              // 如果响应主体中信息是ok,表示可以用,如果主体中信息是no表示不可用
+              if (xhr.responseText === 'ok') {
+                //给span添加文本
+                tip.innerText = '用户名可用'
+                tip.style.color = 'green'
+              } else {
+                tip.innerText = '用户名不可用'
+                tip.style.color = 'red'
+              }
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

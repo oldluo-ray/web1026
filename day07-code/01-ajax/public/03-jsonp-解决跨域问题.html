@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">按钮</button>
+    <!-- <script src="http://localhost:5000/test"> -->
+    <!-- script标签会把src地址响应回来的内容,放到script子节点的位置上执行 -->
+
+    <!-- jsonp原理:
+    
+      利用script标签不受同源策略影响,从而直接使用script的src发送请求,
+      只是为了接收到响应的数据,要个服务器上传一个全局的函数的函数名.这个全局的函数用来接收数据
+      后台接收到这个script标签的src的请求之后,将要返回的数据,放在函数调用的实参的位置上.script标签请求的数据拿到之后,就是就是一段函数调用的代码.浏览器会执行这段代码.执行代码的时候,我们声明的全局的函数就被调用.就可以通过形参接收到数据
+      优点: 1. 兼容性好
+      缺点: 1. 只能用get请求(因为script标签发出去的就是get请求) 2. 需要后台配合 3. 在全局声明函数
+    -->
+    </script>
+    <script>
+      // jsonp中定义的接收响应的函数,必须定义在全局
+       function fn(data){
+          // 这个data就是接收服务器响应回来的数据的
+          console.log(data)
+       }
+      
+      const btn = document.getElementById('btn')
+      btn.onclick = function () {
+        // 浏览器地址栏直接输入地址
+        // location.href = 'http://localhost:5000/test'
+        // form 肯定不行
+        // a  也不行
+        // link, img
+        // script 不受同源策略影响
+        const script = document.createElement('script')
+        script.src = 'http://localhost:5000/test?callback=fn'
+        document.body.appendChild(script)
+
+      }
+    </script>
+    
+    <!-- <script src="http://localhost:5000/test">
+    
+      //把请求回来的内容放在子节点的位置上执行
+      fn({})
+    </script> -->
+  
+   
+  </body>
+</html>

@@ -7,30 +7,20 @@
   </head>
   <body>
     <button id="btn">按钮</button>
-    <div id="loading" style="display: none">loading...</div>
+
     <script src="http://localhost:5000/jquery-1.12.4.js"></script>
     <script>
       // jq中如何发送ajax请求
       $('#btn').on('click', function () {
         $.ajax({
-          type: 'get', //请求方式,不写默认是get
+          type: 'get', //jq中使用jsonp必须是get请求
           url: 'http://localhost:5000/test', //请求的地址
           data: {
             // 要上传的数据 get/post/其他请求方式
             name: 'zs',
           },
           timeout: 3000, // 设置超时时间单位是毫秒
-          dataType: 'json', // text/json  默认值text 如果是json,会自动将json字符串解析成对象
-          // 发送请求之前调用
-          beforeSend: function () {
-            console.log('发送请求之前调用')
-            // return false // true表示请求继续发送, false请求不发送了 注意:不写return.默认返回true
-
-            // 1. 可以在这里做表单校验,不通过,不发送请求
-            // 2. 可以在这里让loading框展示(完成的时候,隐藏)
-            loading.style.display = 'block'
-          },
-
+          dataType: 'jsonp', // 如果dataType的值是jsonp.jq底层就会帮我们实现jsonp
           // 响应成功回调
           success: function (data) {
             console.log('成功', data)
@@ -38,11 +28,6 @@
           //响应失败的回调
           error: function (xhr) {
             console.log('失败', xhr)
-          },
-          //响应完成
-          complete: function () {
-            console.log('响应完成')
-            loading.style.display = 'none'
           },
         })
       })

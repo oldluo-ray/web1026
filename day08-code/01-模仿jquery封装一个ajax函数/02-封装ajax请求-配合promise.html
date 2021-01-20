@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">按钮</button>
+    <script>
+      //  因为要配合promise使用
+      // 1. 要使用promise这个容器,将异步操作包裹起来
+      // 2. 最终要将promise返回出去
+      // 3. 根据请求的结果,动态的修改promise的状态
+      function myAjax(option) {
+        // 判断option是否传入参数了
+        if (!option || typeof option !== 'object') return
+        let {
+          url,
+          type = 'get',
+          data,
+          complete,
+          success,
+          error,
+          beforeSend,
+          dataType = 'text',
+        } = option
+        //如果没有请求路径,直接return
+        if (!url) return
+
+        return new Promise((resolve, reject) => {
+          // 创建xhr对象
+          const xhr = new XMLHttpRequest()
+          //解析上传的参数
+          let params = objToStr(data)
+          // get请求,将参数拼接在url后面
+          if (type === 'get') {
+            url += '?' + params
+            params = null
+          }
+          xhr.open(type, url)
+          // 如果type不是post.&&后面的代码就不会执行了
+          type === 'post' &&
+            xhr.setRequestHeader(
+              'content-type',
+              'application/x-www-form-urlencoded'
+            )
+          // 如果用户声明了beforeSend函数,但是没有显示的返回true/false. 默认就是返回的true. 如果用户没有声明beforeSend函数,也是true
+          let res = undefined
+          if (!beforeSend) {
+            res = true
+          } else {
+            let result = beforeSend()
+            if (result === undefined) {
+              res = true
+            } else {
+              res = result
+            }
+          }
+          // 通过res的值判断请求是否发送
+          res && xhr.send(params)
+          // 响应的代码
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+              complete && complete()
+              if (xhr.status === 200) {
+                let value = ''
+                if (dataType === 'text') {
+                  value = xhr.responseText
+                } else if (dataType === 'json') {
+                  value = JSON.parse(xhr.responseText)
+                }
+                success && success(value)
+                resolve(value)
+              } else {
+                error && error()
+                reject('请求失败')
+              }
+            }
+          }
+        })
+      }
+
+      // 定义一个函数,将data这个对象转成键值对的字符串
+      function objToStr(data) {
+        if (typeof data !== 'object') return ''
+        // let str = ''
+        // for (let key in data) {
+        //   str += key + '=' + data[key] + '&'
+        // }
+        // console.log(str)
+        let arr = []
+        for (let key in data) {
+          arr.push(key + '=' + data[key])
+        }
+        //最终要返回一个字符串
+        return arr.join('&')
+      }
+
+      const btn = document.getElementById('btn')
+      btn.onclick = async function () {
+        const data = await myAjax({
+          url: 'http://localhost:5000/test',
+          data: {
+            name: 'zs',
+            age: 18,
+          },
+          dataType: 'json',
+        })
+
+        console.log(data)
+      }
+    </script>
+  </body>
+</html>

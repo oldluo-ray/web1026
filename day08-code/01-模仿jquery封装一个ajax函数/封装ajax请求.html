@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">按钮</button>
+    <script>
+      // 封装ajax函数:
+      // 函数名  myAjax
+      // 参数    option配置对象里面包含的了所有需要的参数
+      // 返回值  不写返回值
+
+      function myAjax(option) {
+        // 判断option是否传入参数了
+        if (!option || typeof option !== 'object') return
+
+        // 判断,option中是否有url地址,如果没有,不发送请求
+        let {
+          url,
+          type = 'get',
+          data,
+          complete,
+          success,
+          error,
+          beforeSend,
+        } = option
+
+        //如果没有请求路径,直接return
+        if (!url) return
+
+        // 创建xhr对象
+        const xhr = new XMLHttpRequest()
+        //处理请求方式
+        // 如果传入type属性的值,就使用传入的,如果没传,就只用get
+        // type = type || 'get'
+        // 判断如果是get请求,需要把参数拼接到url后面
+        // 将data转成字符串的需要执行以下,因为不管是get,还是post,上传的时候,都要转成字符串
+        let params = objToStr(data)
+
+        if (type === 'get') {
+          // data的值是一个对象,但是不管是get请求还是post.上传的参数都应该是键值对的字符串
+          url += '?' + params
+          params = null
+        }
+        xhr.open(type, url)
+
+        // 如果type不是post.&&后面的代码就不会执行了
+        type === 'post' &&
+          xhr.setRequestHeader(
+            'content-type',
+            'application/x-www-form-urlencoded'
+          )
+
+       
+
+        // 如果用户声明了beforeSend函数,但是没有显示的返回true/false. 默认就是返回的true. 如果用户没有声明beforeSend函数,也是true
+
+        // const res = beforeSend && beforeSend()
+        let res = undefined
+        if (!beforeSend) {
+          res = true
+        } else {
+          let result = beforeSend()
+          if (result === undefined) {
+            res = true
+          } else {
+            res = result
+          }
+        }
+        // 设置请求主体并发送请求
+        // if (type === 'get') {
+        //   xhr.send(nul)
+        // } else {
+        //   xhr.send(params)
+        // }
+        // 更简单的方式
+        res && xhr.send(params)
+
+        // 响应的代码
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            //表示响应完成了
+            // if (complete && typeof complete === 'function') {
+            //   complete()
+            // }
+            complete && complete()
+
+            if (xhr.status === 200) {
+              success && success(xhr.responseText)
+            } else {
+              error && error()
+            }
+          }
+        }
+      }
+
+      // 定义一个函数,将data这个对象转成键值对的字符串
+      function objToStr(data) {
+        if (typeof data !== 'object') return ''
+        // let str = ''
+        // for (let key in data) {
+        //   str += key + '=' + data[key] + '&'
+        // }
+        // console.log(str)
+        let arr = []
+        for (let key in data) {
+          arr.push(key + '=' + data[key])
+        }
+        //最终要返回一个字符串
+        return arr.join('&')
+      }
+
+      const btn = document.getElementById('btn')
+      btn.onclick = function () {
+        myAjax({
+          url: 'http://localhost:5000/test',
+          data: {
+            name: 'zs',
+            age: 18,
+          },
+          success: function (data) {
+            console.log('响应成功了')
+            console.log(data)
+          },
+          error: function () {
+            console.log('响应失败了')
+          },
+          beforeSend: function () {
+            console.log('发送请求之前')
+          },
+        })
+      }
+    </script>
+  </body>
+</html>

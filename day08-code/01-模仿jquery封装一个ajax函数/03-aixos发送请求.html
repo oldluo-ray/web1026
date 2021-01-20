@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">axios发送请求</button>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script src="./axios.min.js"></script> -->
+    <script>
+      function getFn() {
+        return axios({
+          method: 'get',
+          params: {
+            name: 'ls',
+          },
+          url: 'http://localhost:5000/test',
+        })
+      }
+
+      function postFn() {
+        return axios({
+          method: 'post',
+          data: {
+            name: 'lw',
+          },
+          url: 'http://localhost:5000/test',
+        })
+        //注意: axios会自动把参数转成json格式发送给服务器
+      }
+    </script>
+    <script>
+      const btn = document.getElementById('btn')
+      btn.onclick = async function () {
+        // 这种发送请求的方式,会导致,第一个请求成功之后,才会发送第二个请求.
+        // await getFn()
+        // await postFn()
+        // 所以才需要用到axios.all()
+        // all方法,可以让这些异步请求,同时发出去(并发).当两个请求都成功了,resutl就接收到了两个请求的结果是一个数组
+        const result = await axios.all([getFn(), postFn()])
+        console.log(result)
+      }
+    </script>
+  </body>
+</html>

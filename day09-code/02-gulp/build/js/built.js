@@ -12,6 +12,7 @@ setTimeout(function () {
   console.log(1);
 }, 200);
 console.log(123);
+console.log(456);
 },{"./module1":2,"./module2":3}],2:[function(require,module,exports){
 "use strict";
 

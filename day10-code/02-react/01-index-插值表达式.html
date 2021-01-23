@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .one {
+        border: 10px solid pink;
+      }
+
+      .two {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <!-- 将jsx转成createElement的包 -->
+    <script src="js/babel.min.js"></script>
+
+    <!-- <script>
+      const reactDom = React.createElement('h1', { id: 'box' }, '文本', '哈哈')
+      console.log(reactDom)
+
+      ReactDOM.render(reactDom, document.getElementById('root'))
+    </script> -->
+    <!-- 浏览器不认识jsx,但是开发的时候,都是用jsx动态的生成标签,所以需要使用babel包,帮我们将jsx的代码,解析成React.createElement() -->
+    <!-- type="text/babel"作用:就是告诉babel这里的代码需要babel编译. -->
+    <script type="text/babel">
+      let username = 'zs'
+      let a = 1
+      let two = 'two'
+
+      let div = (
+        // 在jsx中,class要写成className
+        <div id="box" className="one">
+          {/* for 要写成htmlFor*/}
+          <label htmlFor="two"></label>
+          {/* 这是jsx里面的注释*/}
+          {/* 在jsx中想要插入js数据, 需要写一个插值表达式{}
+        
+            插值表达式里面可以写什么呢? 可以写表达式,不能写语句
+            表达式: 变量,常量,函数,数组,对象,三元,与或非逻辑,字面量
+            不能写if和循环. 注意: let a = 1 是语句,不是表达式,所以不能加到插值表达式中
+
+            插值表示可以写在什么位置? 
+                可以写在jsx的任何位置.但是有意义的写法是写在子节点的位置和属性的位置
+        */}
+          <p>{username}</p>
+          <p>{a}</p>
+          <p>{123}</p>
+          {/* 渲染boolean 是没有意义的,所以页面上有P标签,但是没有内容*/}
+          <p>{true}</p>
+          {/* 渲染数组的时候,可以直接将数组中的每一项,直接按照顺序,渲染到页面上*/}
+          <p>{[1, 2, 3]}</p>
+          {/* <p>{[<span>1</span>, <span>2</span>, <span>3</span>]}</p>*/}
+          {/* 插值表达式中是一定可以传入对象的.但是如果直接渲染一个对象是没有意义的.所以react不去渲染,然后报错*/}
+          {/*<p>{{ name: 'zs' }}</p>*/}
+          {/* 插值表达式中是一定可以传入函数的.但是如果直接渲染一个函数是没有意义的.所以react不去渲染,然后报错*/}
+          <p>{function () {}}</p>
+          <p>{true ? '是' : '不是'}</p>
+          <p>{123 && 567}</p>
+
+          <div className={two}></div>
+        </div>
+      )
+      // 将react元素转成真正的dom元素,添加到root中
+      ReactDOM.render(div, document.getElementById('root'))
+    </script>
+
+    <script>
+      // new Object()
+      // const obj = new 构造函数()
+      // {}
+      // // new Array()
+      // []
+      // new Number(1)
+      // 1
+    </script>
+  </body>
+</html>

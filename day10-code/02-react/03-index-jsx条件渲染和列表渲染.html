@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <!-- 将jsx转成createElement的包 -->
+    <script src="js/babel.min.js"></script>
+
+    <script type="text/babel">
+      // 条件渲染:
+      // let flag = '渣男'
+      // let div = <div>{flag === '渣女' ? <p>zs</p> : <p>hcy</p>}</div>
+      // let div = <div>{flag && <div>lph</div>}</div>
+      // 列表渲染:
+      let arr = [
+        { id: 1, name: 'hh', age: 30, info: '华语歌坛第一人' },
+        { id: 2, name: 'zs', age: 32, info: '神经病' },
+      ]
+
+      let ul = (
+        <ul>
+          {arr.map((item) => {
+            return (
+              // 注意:列表渲染的时候,最外层的节点,要求加一个key属性.这个是因为react底层要使用key提升效率.如果不加也可以正常运行,但是底层执行效率不高.
+              // key的值要求是唯一的
+              <li key={item.id}>
+                <h1>{item.name}</h1>
+                <h2>{item.age}</h2>
+                <h3>{item.info}</h3>
+              </li>
+            )
+          })}
+        </ul>
+      )
+      // 将react元素转成真正的dom元素,添加到root中
+      ReactDOM.render(ul, document.getElementById('root'))
+    </script>
+  </body>
+</html>

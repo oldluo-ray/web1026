@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+
+    <script type="text/babel">
+      // 小结:
+      //  1.  注册事件, 直接写在标签上,写小驼峰命名法.
+      //  2.  事件的值必须是一个函数
+      //  3. 函数中this指向了undefined
+      //  4. 可以接收到一个合成事件,但是使用的时候,根事件对象基本一样
+      function fn(e) {
+        // 原来在dom中,this指向事件源
+        // react执行注册事件的事件处理函数中,底层相当于是普通函数调用.所以按道理应该指向window.但是由于jsx会被babel编译,babel编译之后,代码执行时严格模式.严格模式下this不能指向window,所以就指向了undefined
+        // console.log(this)
+        // 注意: 这个e接收的不是dom中的事件对象,是react封装了事件对象之后的一个叫做合成事件的对象. 然后再使用的时候,可以简单当成事件对象去使用
+        console.log(e.keyCode)
+        console.log(e.target)
+        console.log(e)
+        // 了解: 注意无法在控制台查看合成事件的属性的值.但是如果调用了合成事件.persist()这个函数就可以查看了
+        e.persist()
+        console.log('按钮被点击了')
+      }
+      let div = (
+        <div>
+          <div>1</div> <p>2</p>
+          {/* 注册事件时, 插值表达式中要求是一个函数 */}
+          <input onKeyUp={fn} />
+        </div>
+      )
+
+      ReactDOM.render(div, document.getElementById('root'))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // es6中的类其实就是js的一个语法糖.
+      // 语法糖: js标准中没有定义.只是标准写法的一种简写形式
+      function Person(name) {
+        this.name = name
+        // this.say =
+      }
+
+      Person.prototype.say = function () {
+        console.log('你好,我是' + this.name)
+      }
+
+      function Student(name, score) {
+        Person.call(this, name) //借用构造函数继承
+        this.score = score
+      }
+      Student.prototype = new Person()
+      const p1 = new Person('zs')
+      p1.say()
+      console.log(p1)
+      const s1 = new Student('ls', 100)
+      s1.say()
+
+      class Person {
+        constructor(name) {
+          /// 在构造函数中,这种写法,才是将属性添加到实例身上
+          this.name = name
+        }
+        // 直接在类中,以下面这种语法定义函数,这个函数就是直接添加到了原型上面
+        say() {
+          console.log('你好,我是' + this.name)
+        }
+      }
+
+      class Student extends Person {
+        constructor(name, score) {
+          // 这行super() 就是相当于是Person.call()这行代码
+          super(name)
+          this.score = score
+        }
+      }
+    </script>
+  </body>
+</html>

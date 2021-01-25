@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+
+    <script type="text/babel">
+      // 注意: 一个段jsx,应该有一个根标签
+      let div = (
+        <div>
+          <div>1</div> <p>2</p>
+        </div>
+      )
+
+      ReactDOM.render(div, document.getElementById('root'))
+    </script>
+  </body>
+</html>

@@ -3,13 +3,8 @@ import Item from '../Item/Item'
 import './List.css'
 export default class List extends Component {
   render() {
-    const { list,getTodoIdUpdate,getTodoIdDelete } = this.props
-    return (
-      <ul className="todo-main">
-        {list.map((item) => {
-          return <Item key={item.id} todo={item} getTodoIdUpdate={getTodoIdUpdate} getTodoIdDelete={getTodoIdDelete}></Item>
-        })}
-      </ul>
-    )
+    // 注意: this.props.children是List组件使用时,子节点位置的内容
+    // console.log(this.props.children)
+    return <ul className="todo-main">{this.props.children}</ul>
   }
 }

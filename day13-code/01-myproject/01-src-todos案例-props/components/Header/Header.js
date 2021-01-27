@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
 import './Header.css'
-import Pubsub from 'pubsub-js'
 export default class Header extends Component {
   state = {
     todoName: '',
   }
-
   handle = (e) => {
     this.setState({
       todoName: e.target.value.trim(),
     })
   }
 
-  keyUp = (e) => {
-    if (e.keyCode === 13 && this.state.todoName !== '') {
-      Pubsub.publish('add', this.state.todoName)
+  // 监听键盘事件的处理函数
+  keyUpHandle = (e) => {
+    let { todoName } = this.state
+    // 表示按下回车键
+    if (e.keyCode === 13 && todoName !== '') {
+      //将用户输入结果,插入到todolist这个数组中
+      this.props.fn(this.state.todoName)
       this.setState({
         todoName: '',
       })
@@ -25,10 +27,10 @@ export default class Header extends Component {
       <div className="todo-header">
         <input
           type="text"
-          value={this.state.todoName}
           placeholder="请输入你的任务名称，按回车键确认"
+          value={this.state.todoName}
           onChange={this.handle}
-          onKeyUp={this.keyUp}
+          onKeyUp={this.keyUpHandle}
         />
       </div>
     )

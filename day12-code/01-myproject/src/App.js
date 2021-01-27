@@ -23,7 +23,7 @@ export default class App extends Component {
       },
     ],
   }
-
+  // 用来接收header组件传过来的任务名称的函数
   getTodoName = (todoName) => {
     //  根据todoName生成一个对象
     let obj = {
@@ -42,7 +42,6 @@ export default class App extends Component {
       list: newList,
     })
   }
-
   render() {
     return (
       <div className="todo-container">

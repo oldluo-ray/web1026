@@ -22,7 +22,7 @@ export default function withForm(WrappedComponent) {
     render() {
       // 这个组件中,要渲染的其实就是需要公共状态和公共逻辑的组件
       // 也就是调用withForm时,传入的那个组件
-      return <WrappedComponent />
+      return <WrappedComponent {...this.state} handle={this.handle} />
     }
   }
 }

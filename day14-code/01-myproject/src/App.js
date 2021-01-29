@@ -5,6 +5,7 @@ import Register from './pages/Register'
 import withForm from './withForm'
 
 const WithLogin = withForm(Login)
+const WithRegister = withForm(Register)
 
 export default class App extends Component {
   render() {
@@ -12,6 +13,7 @@ export default class App extends Component {
       <div>
         <h1>高阶组件</h1>
         <WithLogin />
+        <WithRegister />
       </div>
     )
   }

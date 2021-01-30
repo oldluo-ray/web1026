@@ -6,23 +6,34 @@ import Detail from './pages/Detail'
 // Route组件,定义了路径和对应视图的规则
 // Link组件, 修改了浏览器地址栏的路径,但是不让浏览器发送请求
 // BrowserRouter as Router 给BR起个别名.原来的BR就不能用了,应该使用新的名字
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-export default class App extends Component {
+import {
+  Route,
+  Link,
+  Switch,
+  Redirect,
+  NavLink,
+  withRouter,
+} from 'react-router-dom'
+
+import './App.css'
+class App extends Component {
   render() {
     return (
       // BrowserRouter必须包裹整个应用. 而且只需要些一次
-      <Router>
-        <div>
-          <h1>app根组件</h1>
-          {/* link组件,相当于a标签,但是阻止了a的默认行为 */}
-          <Link to="/home">首页</Link>
-          <Link to="/detail">详情页</Link>
 
-          {/* 使用Route组件,配置路径和视图的对应规则 */}
+      <div>
+        <h1>app根组件</h1>
+        {/* pathname: /home/item2 */}
+        <Switch>
+          <Route path="/" component={Home} exact></Route>
           <Route path="/home" component={Home}></Route>
           <Route path="/detail" component={Detail}></Route>
-        </div>
-      </Router>
+        </Switch>
+      </div>
     )
   }
 }
+
+const WithApp = withRouter(App)
+
+export default WithApp

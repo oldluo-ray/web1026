@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // 从react-redux这个包包里面,导出一个高阶组价函数
 // 这个函数.用来连接当前Count组件和redux
 import { connect } from 'react-redux'
+import { increment } from './redux/actions'
 
 class Count extends Component {
   render() {
@@ -11,10 +12,17 @@ class Count extends Component {
         <div>{this.props.count}</div>
         <button
           onClick={() => {
-            this.props.dispatch({ type: 'INCREMENT', data: 1 })
+            this.props.incre(1)
           }}
         >
           按钮+1
+        </button>
+        <button
+          onClick={() => {
+            this.props.incre(5)
+          }}
+        >
+          按钮+5
         </button>
       </div>
     )
@@ -32,4 +40,15 @@ function mapStateToProps(state) {
     count: state.count,
   }
 }
-export default connect(mapStateToProps)(Count)
+
+// 把封装了dispatch的函数,传递给组件中
+// 将这个函数,传入到connect第一次调用的第二个参数上面,Count组件就拿不到dispatch,
+//拿到的就是这个函数体中返回的函数
+function mapDispatchToProps(dispatch) {
+  return {
+    incre: function (data) {
+      dispatch(increment(data))
+    },
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Count)

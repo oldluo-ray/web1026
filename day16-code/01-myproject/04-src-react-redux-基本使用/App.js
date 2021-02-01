@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 
-import Count from './container/CountContainer'
+import Count from './Count'
 import Demo from './Demo'
 
 import store from './redux/store'

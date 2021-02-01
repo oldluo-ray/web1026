@@ -15,10 +15,10 @@ export default class Count extends Component {
         </button>
         <button
           onClick={() => {
-            this.props.incrementAsync()
+            this.props.increment(5)
           }}
         >
-          按钮+n(异步)
+          按钮+5
         </button>
       </div>
     )

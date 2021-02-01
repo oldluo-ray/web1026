@@ -54,3 +54,18 @@
 //     }
 
 // }
+
+function fn() {
+    // 撒打发斯蒂芬
+  function fn1() {
+    function fn2() {
+      function fn3() {}
+      fn3()
+    }
+    fn2()
+  }
+  fn1()
+  console.log(1)
+}
+
+fn()

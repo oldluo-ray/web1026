@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import Item from '../Item/Item'
+import Item from '../../container/ItemContainer'
 import './List.css'
 export default class List extends Component {
   render() {
+    let { list } = this.props
     return (
       <ul className="todo-main">
-        <Item></Item>
-        <Item></Item>
-        <Item></Item>
+        {list.map((item) => (
+          <Item key={item.id} todo={item}></Item>
+        ))}
       </ul>
     )
   }

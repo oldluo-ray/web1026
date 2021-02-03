@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box" style="border: 10px solid green"></div>
+
+    <script>
+      // 获取box这个盒子的样式
+      const box = document.getElementsByClassName('box')[0]
+      //   console.log(box.style.width)
+      //   console.log(box.style.border) //只能获取行内样式
+      //   console.log(box.offsetWidth) //可以拿到盒子的宽高,可视区的宽高,内容的宽高
+      //全局的函数,可以拿到指定dom对象的所有的样式
+      //   const 样式对象 = getComputedStyle(dom对象)
+      const res = getComputedStyle(box)
+      console.log(res.border)
+      console.log(res.width)
+      console.log(res.backgroundColor)
+    </script>
+  </body>
+</html>

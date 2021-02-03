@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+   <link rel="stylesheet" href="./10-rem方式二.css">
+  </head>
+  <body>
+    <div id="box"></div>
+
+    <script>
+      function adapter() {
+        // 1. 动态计算根标签的字体
+        // 设备独立像素的宽度 / 10
+        const rootFontSize = document.documentElement.clientWidth / 10
+        document.documentElement.style.fontSize = rootFontSize + 'px'
+
+        // 2. 动态计算rem值
+        // rem值 = 设计值 / (设计稿的宽度 / 10)
+      }
+
+      adapter()
+      window.onresize = adapter
+    </script>
+  </body>
+</html>

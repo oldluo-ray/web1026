@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 1500px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #box {
+        width: 100%;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+    <script>
+      console.log(
+        '浏览器最干净的可视区域',
+        document.documentElement.clientWidth
+      ) //浏览器最干净的可视区域（常用）
+      console.log('包含滚动条可视区域', window.innerWidth) //包含滚动条可视区域
+      console.log('包含滚动条、边框的可视区域', window.outerWidth) //包含滚动条、边框的可视区域
+      console.log('与浏览器无关，设备整个屏幕的宽度', screen.width) //与浏览器无关，设备整个屏幕的宽度
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background-size: 100%;
+      }
+
+      .one {
+        background-image: url('./imgs/logo.png');
+      }
+
+      @media screen and (-webkit-min-device-pixel-ratio: 2) {
+        .one {
+          background-image: url('./imgs/logo@2x.png');
+        }
+      }
+
+      @media screen and (-webkit-min-device-pixel-ratio: 3) {
+        .one {
+          background-image: url('./imgs/logo@3x.png');
+        }
+      }
+
+      .two {
+        background-image: url('./imgs/logo@2x.png');
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+         注意: 位图在高清屏上失真的原因,是因为当一个位图像素,被一个物理像素渲染的时候,还是清晰的.但是一个位图像素被多个物理像素渲染了.就会失真(模糊)
+
+         解决:一个位图像素,被一个物理像素渲染
+         如果屏幕的像素比: 2. 则使用2x图
+         如果屏幕的像素比: 3. 则使用3x图
+         如果屏幕的像素比: 1. 则使用正常尺寸的图片
+       -->
+    <div class="box one"></div>
+    <div class="box two"></div>
+  </body>
+</html>

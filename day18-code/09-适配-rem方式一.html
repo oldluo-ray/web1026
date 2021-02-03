@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #box {
+        width: 3.45rem;
+        height: 1.5rem;
+        margin: 0.15rem;
+        background-color: skyblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+
+    <script>
+      function adapter() {
+        // 1. 计算根标签的字体大小
+        // 当前设备的独立像素 *100 / 设计稿的宽度
+        const rootFontSize = (document.documentElement.clientWidth * 100) / 375
+        document.documentElement.style.fontSize = rootFontSize + 'px'
+
+        // 2. 根据设计稿的px值,计算rem值.然后写rem值
+      }
+
+      adapter()
+      window.onresize = adapter
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Document</title>
+    <style>
+      div {
+        font-size: 40px;
+      }
+      #one {
+        width: 100%;
+        height: 100px;
+        background-color: red;
+      }
+      #one {
+        width: 100%;
+        height: 100px;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="one"></div>
+    <div id="two"></div>
+    <img src="./imgs/1.jpg" alt="" />
+    <img src="./imgs/2.jpg" alt="" />
+    <img src="./imgs/3.jpg" alt="" />
+    <img src="./imgs/4.jpg" alt="" />
+
+    <script>
+      // 注意: pc端缩放,视口发生了变化. 所以pc端缩放,布局会被影响
+      //   console.log(document.documentElement.clientWidth)
+      //   window.onresize = function () {
+      //     console.log(document.documentElement.clientWidth)
+      //   }
+
+      // 移动端
+      one.innerText =
+        '移动端布局视口的宽度:' + document.documentElement.clientWidth
+      two.innerText = '移动端视觉视口的宽度:' + window.innerWidth
+
+      setInterval(() => {
+        one.innerText =
+          '移动端布局视口的宽度:' + document.documentElement.clientWidth
+        two.innerText = '移动端视觉视口的宽度:' + window.innerWidth
+      }, 200)
+    </script>
+  </body>
+</html>

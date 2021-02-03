@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 开启理想视口的代码
+      开启理想视口之后,会让布局视口的宽度就等于当前设备的设备独立像素
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      div {
+        font-size: 40px;
+      }
+
+      #box {
+        width: 100%;
+        height: 300px;
+        /* background-color: red;
+         */
+        border: 1px solid blue;
+      }
+      #box1 {
+        width: 100%;
+        height: 300px;
+        /* background-color: red;
+         */
+        border: 1px solid blue;
+      }
+
+      #box2 {
+        width: 345px;
+        height: 250px;
+        margin: 15px;
+        background-color: skyblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <script>
+      //  移动端的布局视口决定了在布局移动端页面的时候,占满屏幕水平方向应该写多少个像素
+      // console.log('移动端布局视口', document.documentElement.clientWidth)
+      // console.log('移动端视觉视口', window.innerWidth)
+
+      box.innerText = '布局视口:' + document.documentElement.clientWidth
+      box1.innerText = '视觉视口:' + window.innerWidth
+    </script>
+  </body>
+</html>

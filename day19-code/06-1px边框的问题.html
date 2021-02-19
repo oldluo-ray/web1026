@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #box {
+        width: 3.4rem;
+        height: 1.5rem;
+        margin: 0.15rem;
+        background-color: red;
+        border: 1px solid blue;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+
+    <script>
+      // 1. 计算根标签字体的大小:
+      function adapter() {
+        const fontSize = (document.documentElement.clientWidth * 100) / 375
+        document.documentElement.style.fontSize = fontSize + 'px'
+      }
+      adapter()
+      window.onresize = adapter
+
+      // 2. 将布局视口的宽度变大
+      const meta = document.querySelector('meta[name=viewport]')
+      const ratio = 1 / window.devicePixelRatio
+      meta.setAttribute('content', 'width=device-width, initial-scale=' + ratio)
+
+      // 3. 让根标签的字体变大.导致整个盒子变大
+      const fontSize = parseInt(document.documentElement.style.fontSize)
+      document.documentElement.style.fontSize =
+        fontSize * window.devicePixelRatio + 'px'
+    </script>
+  </body>
+</html>

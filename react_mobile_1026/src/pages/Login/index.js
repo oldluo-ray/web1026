@@ -9,6 +9,9 @@ import {
 } from 'antd-mobile'
 
 export default class Login extends Component {
+  toRegister = () => {
+    this.props.history.replace('/register/phone', { from: '/login' })
+  }
   render() {
     return (
       <div>
@@ -41,7 +44,7 @@ export default class Login extends Component {
             <WhiteSpace></WhiteSpace>
             <div className="login-nav">
               <div>账号密码登录</div>
-              <div>手机快速注册</div>
+              <div onClick={this.toRegister}>手机快速注册</div>
             </div>
             <div className="login-other">
               <div className="line"></div>

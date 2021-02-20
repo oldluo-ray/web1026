@@ -2,6 +2,8 @@
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import RegisterPhone from '../pages/Register/Registerphone'
+import RegisterCode from '../pages/Register/RegisterCode'
+import RegisterPassword from '../pages/Register/RegisterPassword'
 
 // 这个数组最终要渲染出来一个个的Route组件,所以这个数组又被人为的称为路由表
 export default [
@@ -21,5 +23,13 @@ export default [
   {
     path: '/register/phone',
     component: RegisterPhone,
+  },
+  {
+    path: '/register/code',
+    component: RegisterCode,
+  },
+  {
+    path: '/register/password',
+    component: RegisterPassword,
   },
 ]

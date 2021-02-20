@@ -2,9 +2,74 @@
   margin: 0;
   padding: 0;
 }
-#box {
-  width: 340px;
-  height: 150px;
-  margin: 15px;
-  background-color: red;
+
+body {
+  background-color: #fff;
+}
+
+.inp-phone {
+  display: flex;
+  align-items: center;
+}
+/* 
+.inp-code {
+  display: flex;
+  align-items: center;
+} */
+
+.inp-code-tip {
+  height: 30px;
+  line-height: 30px;
+  border-left: 1px solid #ddd;
+  padding-left: 10px;
+  color: #999;
+  margin-left: 10px;
+}
+
+.login-btn {
+  border-radius: 23px;
+}
+
+.login-nav {
+  display: flex;
+  justify-content: space-between;
+  color: #999;
+}
+.login-other {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.line {
+  width: 100px;
+  border-top: 1px solid #ddd;
+}
+.text {
+  color: #999;
+}
+
+.login-oauth {
+  text-align: center;
+  margin-top: 20px;
+}
+.login-oauth i {
+  font-size: 40px;
+  border-radius: 50%;
+  padding: 10px;
+}
+.login-oauth i:nth-child(1) {
+  background-color: rgb(184, 179, 179);
+}
+.login-oauth i:nth-child(2) {
+  background-color: rgb(141, 187, 218);
+  margin: 0 10px;
+}
+.login-oauth i:nth-child(3) {
+  background-color: rgb(128, 185, 133);
+}
+.login-bottom {
+  margin-top: 20px;
+  text-align: center;
 }

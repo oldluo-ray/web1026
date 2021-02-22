@@ -34,7 +34,7 @@ class VerifyCode extends Component {
       // 修改样式
       this.timeid = setInterval(() => {
         count--
-        if (count == 0) {
+        if (count === 0) {
           //清除定时器
           clearInterval(this.timeid)
           this.setState({
@@ -130,7 +130,7 @@ class VerifyCode extends Component {
           </WingBlank>
           <WingBlank size="lg">
             遇到问题了?
-            <a href="">请联系客服</a>
+            <a href="http://www.atguigu.com">请联系客服</a>
           </WingBlank>
         </WingBlank>
       </div>

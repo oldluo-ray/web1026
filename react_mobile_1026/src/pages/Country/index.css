@@ -1,0 +1,20 @@
+.am-list-body {
+  padding-right: 30px;
+}
+
+.countNavBar {
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 90px;
+  right: 0;
+  z-index: 99999999999999999999999;
+
+  /* 由于这个容器中,轴是垂直方向,所以水平居中使用align-items: center */
+  align-items: center;
+}
+.countNavBar a {
+  margin-bottom: 10px;
+  color: #999;
+}

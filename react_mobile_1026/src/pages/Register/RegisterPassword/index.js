@@ -6,7 +6,6 @@ import {
   WingBlank,
   WhiteSpace,
   Button,
-  Modal,
   Toast,
 } from 'antd-mobile'
 import { createForm } from 'rc-form'
@@ -27,7 +26,6 @@ class VerifyPassword extends Component {
       isDisabled,
     })
   }
-
   // 切换密码是否可见的事件处理函数
   changePswShow = () => {
     let { isShow } = this.state
@@ -35,7 +33,6 @@ class VerifyPassword extends Component {
       isShow: !isShow,
     })
   }
-
   // 注册的事件处理函数
   register = async () => {
     const phone = localStorage.getItem('phone')
@@ -112,7 +109,7 @@ class VerifyPassword extends Component {
           </WingBlank>
           <WingBlank size="lg">
             遇到问题了?
-            <a href="">请联系客服</a>
+            <a href="http://www.atguigu.com">请联系客服</a>
           </WingBlank>
         </WingBlank>
       </div>

@@ -72,7 +72,7 @@ class index extends Component {
             //将手机号存储到本地缓存中
             // 将数据存储到浏览器的本地缓存中(永久存储,键值对的形式.只能存字符串)
             // localStorage.setItem(键,值)
-            localStorage.setItem('phone',phone)
+            localStorage.setItem('phone', phone)
             this.props.history.replace('/register/code', {
               from: '/register/phone',
             })
@@ -89,7 +89,7 @@ class index extends Component {
     const { isDisabled } = this.state
     const { getFieldProps } = this.props.form
     return (
-      <div>
+      <div className="wrap">
         <NavBar
           mode="light"
           icon={<Icon type="left" color={'#000'} />}
